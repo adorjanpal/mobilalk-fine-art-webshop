@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.fineartwebshop.R;
 import com.example.fineartwebshop.databinding.ActivityRegisterBinding;
+import com.example.fineartwebshop.service.AuthService;
 import com.example.fineartwebshop.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,11 +32,15 @@ import validator.Validator;
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
+
+    private AuthService authService;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        authService = AuthService.getInstance();
 
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -51,6 +56,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+
+                finish();
             }
         });
 
@@ -80,22 +88,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 loadingProgressBar.setVisibility(View.VISIBLE);
 
-                mAuth.createUserWithEmailAndPassword(username, password)
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                loadingProgressBar.setVisibility(View.GONE);
+                authService.register(username, password, RegisterActivity.this);
 
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(RegisterActivity.this, "Account created.",
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                loadingProgressBar.setVisibility(View.GONE);
             }
         });
 
