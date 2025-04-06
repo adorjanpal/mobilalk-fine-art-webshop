@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "743175285239",
+    "project_id": "fineartwebshop",
+    "storage_bucket": "fineartwebshop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743175285239:android:cac07f3c87514ead6626f2",
+        "android_client_info": {
+          "package_name": "com.example.fineartwebshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3x7xLu6KgukvKo9Bh-Ym0ycpGzk2LpCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
