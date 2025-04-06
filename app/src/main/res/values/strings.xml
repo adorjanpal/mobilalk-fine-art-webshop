@@ -16,4 +16,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_register">Register</string>
     <string name="switch_to_login">Already have an account? Login</string>
+    <string name="switch_to_register">Don\'t have an account? Register</string>
+    <string name="login_btn">Login</string>
 </resources>
