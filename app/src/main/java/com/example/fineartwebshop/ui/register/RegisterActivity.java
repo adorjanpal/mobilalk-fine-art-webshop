@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.fineartwebshop.R;
 import com.example.fineartwebshop.databinding.ActivityRegisterBinding;
+import com.example.fineartwebshop.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -42,18 +43,18 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final EditText passwordAgainEditText = binding.passwordAgain;
-        final Button loginButton = binding.register;
+        final Button registerBtn = binding.register;
         final ProgressBar loadingProgressBar = binding.loading;
         final TextView switchToLoginText = binding.switchToLogin;
 
         switchToLoginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext())
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String username, password, passwordAgain;
@@ -78,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 loadingProgressBar.setVisibility(View.VISIBLE);
+
                 mAuth.createUserWithEmailAndPassword(username, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
