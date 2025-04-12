@@ -59,7 +59,6 @@ public class AuthService {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Account created.",Toast.LENGTH_SHORT).show();
                             login(username, password, context);
                         } else {
                             // If sign in fails, display a message to the user.
