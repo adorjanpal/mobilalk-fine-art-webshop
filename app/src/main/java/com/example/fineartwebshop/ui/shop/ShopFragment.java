@@ -1,4 +1,4 @@
-package com.example.fineartwebshop.ui.dashboard;
+package com.example.fineartwebshop.ui.shop;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.fineartwebshop.databinding.FragmentDashboardBinding;
+import com.example.fineartwebshop.databinding.FragmentShopBinding;
 
-public class DashboardFragment extends Fragment {
+public class ShopFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentShopBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        ShopViewModel dashboardViewModel =
+                new ViewModelProvider(this).get(ShopViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;

@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:padding="24dp"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".ui.profile.ProfileFragment">
 
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/notifications_text"
+        android:text="@string/profile_text"
         android:textSize="24sp"
         android:textColor="@color/primaryText"
         android:textStyle="bold"
