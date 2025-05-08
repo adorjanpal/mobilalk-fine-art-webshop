@@ -14,6 +14,7 @@ import com.example.fineartwebshop.databinding.ProductCardBinding;
 import com.example.fineartwebshop.model.ProductModel;
 
 
+import java.io.InputStream;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -37,9 +38,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productName.setText(product.getName());
 
         Glide.with(holder.itemView.getContext())
-                .load(R.drawable.ic_home_black_24dp)
-                .placeholder(R.drawable.ic_notifications_black_24dp)
-                .error(R.drawable.ic_launcher_background)
+                .load("file:///android_asset/" + product.getImgUrl())
                 .into(holder.productImage);
     }
 

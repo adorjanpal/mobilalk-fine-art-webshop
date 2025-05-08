@@ -40,14 +40,15 @@ public class HomeFragment extends Fragment {
 
         recyclerView = binding.productsRecyclerView;
 
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
         products = ProductDAO.generateDummyProducts();
         Log.d(TAG, "Number of products: " + products.size());
 
         if (adapter == null) {
             adapter = new ProductAdapter(products);
         }
-
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         recyclerView.setAdapter(adapter);
         return root;
