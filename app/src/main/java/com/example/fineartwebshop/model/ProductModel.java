@@ -28,7 +28,7 @@ public class ProductModel {
     }
 
     public String getImgUrl() {
-        return imgUrl;
+        return !imgUrl.isEmpty() ? imgUrl : "brush_24px";
     }
 
     public void setImgUrl(String imgUrl) {
