@@ -1,6 +1,8 @@
 package com.example.fineartwebshop.model;
 
-public class ProductModel {
+import java.io.Serializable;
+
+public class ProductModel implements Serializable {
     private String description;
     private String imgUrl;
     private String name;

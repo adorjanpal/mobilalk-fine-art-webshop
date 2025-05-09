@@ -11,19 +11,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fineartwebshop.R;
 import com.example.fineartwebshop.adapter.ProductAdapter;
 import com.example.fineartwebshop.dao.ProductDAO;
 import com.example.fineartwebshop.databinding.FragmentHomeBinding;
+import com.example.fineartwebshop.listener.OnProductClickListener;
 import com.example.fineartwebshop.model.ProductModel;
 import com.example.fineartwebshop.type.FirestoreCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements OnProductClickListener {
 
     private FragmentHomeBinding binding;
     private ProductAdapter adapter;
@@ -49,7 +53,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         products = new ArrayList<>();
-        adapter = new ProductAdapter(products);
+        adapter = new ProductAdapter(products, this);
         recyclerView.setAdapter(adapter);
 
 
@@ -93,4 +97,14 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onProductClick(ProductModel product) {
+        NavController navController = Navigation.findNavController(requireView());
+        Bundle bundle = new Bundle();
+
+        bundle.putSerializable("product", product);
+        navController.navigate(R.id.navigation_product_details, bundle);
+    }
+
 }
