@@ -23,7 +23,7 @@
         android:id="@+id/saleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sale"
+        android:text="PRODUCTS"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/white"

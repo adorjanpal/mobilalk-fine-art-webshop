@@ -80,7 +80,6 @@ public class HomeFragment extends Fragment implements OnProductClickListener {
         ProductDAO.getAll(new FirestoreCallback() {
             @Override
             public void onSuccess(List<ProductModel> productList) {
-                Log.d(TAG, "Products loaded: " + productList.size());
                 products.clear();
                 products.addAll(productList);
                 adapter.notifyDataSetChanged();

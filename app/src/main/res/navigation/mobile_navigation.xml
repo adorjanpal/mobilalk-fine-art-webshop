@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="com.example.fineartwebshop.ui.shop.ShopFragment"
-        android:label="@string/title_shop"
-        tools:layout="@layout/fragment_shop" />
+        android:name="com.example.fineartwebshop.ui.cart.CartFragment"
+        android:label="@string/title_cart"
+        tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_profile"

@@ -5,13 +5,13 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/brush_24px"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_shop"
-        android:icon="@drawable/brush_24px"
-        android:title="@string/title_shop" />
+        android:icon="@drawable/shopping_bag_24px"
+        android:title="@string/title_cart" />
 
     <item
         android:id="@+id/navigation_profile"

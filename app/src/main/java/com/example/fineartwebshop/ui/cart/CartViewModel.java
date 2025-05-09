@@ -1,14 +1,14 @@
-package com.example.fineartwebshop.ui.shop;
+package com.example.fineartwebshop.ui.cart;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ShopViewModel extends ViewModel {
+public class CartViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public ShopViewModel() {
+    public CartViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is dashboard fragment");
     }

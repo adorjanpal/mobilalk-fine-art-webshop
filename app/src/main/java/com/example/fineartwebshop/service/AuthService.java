@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.fineartwebshop.MainActivity;
+import com.example.fineartwebshop.dao.UserDAO;
 import com.example.fineartwebshop.ui.login.LoginActivity;
 import com.example.fineartwebshop.ui.register.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,11 +60,10 @@ public class AuthService {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            UserDAO.save(username);
                             login(username, password, context);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(context, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
