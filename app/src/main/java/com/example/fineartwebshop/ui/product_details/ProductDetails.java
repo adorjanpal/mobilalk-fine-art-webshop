@@ -11,6 +11,7 @@ import android.widget.TextView; // Import TextView
 import androidx.annotation.NonNull; // Import NonNull
 import androidx.annotation.Nullable; // Import Nullable
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.fineartwebshop.R;
 import com.example.fineartwebshop.databinding.FragmentProductDetailsBinding; // Assuming you're using View Binding for the detail layout
@@ -52,6 +53,10 @@ public class ProductDetails extends Fragment {
             loadImage(product.getImgUrl(), binding.productImageDetail);
         }
 
+        binding.backButton.setOnClickListener(v -> {
+            navigateBack();
+        });
+
         return root;
     }
 
@@ -79,5 +84,9 @@ public class ProductDetails extends Fragment {
         }).addOnFailureListener(e -> {
             Log.e("StorageError", "Failed to load image in ProductDetails", e);
         });
+    }
+
+    private void navigateBack() {
+        NavHostFragment.findNavController(this).navigateUp();
     }
 }
