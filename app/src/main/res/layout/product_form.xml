@@ -20,6 +20,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/productNameEditText"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -36,6 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:textColor="@color/white"
                 android:id="@+id/productPriceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,12 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Author"
+            android:hint="Description"
             app:layout_constraintTop_toBottomOf="@id/productPriceLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:textColor="@color/white"
                 android:id="@+id/authorEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

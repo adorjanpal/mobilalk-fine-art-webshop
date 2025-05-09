@@ -1,14 +1,15 @@
 package com.example.fineartwebshop.model;
 
 public class ProductModel {
-    private String author;
+    private String description;
     private String imgUrl;
     private String name;
     private Integer price;
     private String seller;
 
-    public ProductModel(String author, String imgUrl, String name, Integer price, String seller) {
-        this.author = author;
+    public ProductModel() {}
+    public ProductModel(String description, String imgUrl, String name, Integer price, String seller) {
+        this.description = description;
         this.imgUrl = imgUrl;
         this.name = name;
         this.price = price;
@@ -19,12 +20,12 @@ public class ProductModel {
         return new ProductModel("", "", "", -1, "");
     }
 
-    public String getAuthor() {
-        return author;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImgUrl() {
@@ -57,5 +58,9 @@ public class ProductModel {
 
     public void setSeller(String seller) {
         this.seller = seller;
+    }
+
+    public String getPriceWithCurrency() {
+        return "$" + this.price;
     }
 }

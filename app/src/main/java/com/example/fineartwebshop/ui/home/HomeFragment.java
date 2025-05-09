@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar; // Import ProgressBar
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,9 @@ import com.example.fineartwebshop.adapter.ProductAdapter;
 import com.example.fineartwebshop.dao.ProductDAO;
 import com.example.fineartwebshop.databinding.FragmentHomeBinding;
 import com.example.fineartwebshop.model.ProductModel;
+import com.example.fineartwebshop.type.FirestoreCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -26,6 +29,7 @@ public class HomeFragment extends Fragment {
     private ProductAdapter adapter;
     private RecyclerView recyclerView;
     private List<ProductModel> products;
+    private ProgressBar loadingProgressBar;
     private final String TAG = "HomeFragment";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,18 +43,16 @@ public class HomeFragment extends Fragment {
         Log.d(TAG, "onCreate() called");
 
         recyclerView = binding.productsRecyclerView;
+        loadingProgressBar = binding.loadingProgressBar;
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        products = ProductDAO.generateDummyProducts();
-        Log.d(TAG, "Number of products: " + products.size());
-
-        if (adapter == null) {
-            adapter = new ProductAdapter(products);
-        }
-
+        products = new ArrayList<>();
+        adapter = new ProductAdapter(products);
         recyclerView.setAdapter(adapter);
+
+
         return root;
     }
 
@@ -58,5 +60,37 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+        loadProductsFromFirestore();
+    }
+
+    private void loadProductsFromFirestore() {
+        loadingProgressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+
+        ProductDAO.getAll(new FirestoreCallback() {
+            @Override
+            public void onSuccess(List<ProductModel> productList) {
+                Log.d(TAG, "Products loaded: " + productList.size());
+                products.clear();
+                products.addAll(productList);
+                adapter.notifyDataSetChanged();
+
+                loadingProgressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.e("FirestoreError", "Failed to fetch products", e);
+                loadingProgressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

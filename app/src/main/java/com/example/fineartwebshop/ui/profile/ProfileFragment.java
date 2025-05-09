@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.fineartwebshop.R;
 import com.example.fineartwebshop.databinding.FragmentProfileBinding;
 import com.example.fineartwebshop.ui.product_form.ProductFormFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
 
@@ -31,21 +32,17 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
 
         TextView usernameTextView = binding.usernameTextView;
-        TextView nameTextView = binding.nameTextView;
         Button sellButton = binding.sellButton;
 
         Glide.with(binding.getRoot().getContext())
                 .load(R.drawable.account_circle_24px)
                 .into(binding.profilePicture);
 
-        usernameTextView.setText("DummyUsername");
-        nameTextView.setText("Dummy Name");
+        usernameTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         sellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the button click here
-                // Create new fragment and transaction
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.nav_host_fragment_activity_main, new ProductFormFragment());
@@ -54,8 +51,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

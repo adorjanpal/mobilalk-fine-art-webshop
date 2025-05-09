@@ -171,24 +171,16 @@ public class ProductFormFragment extends Fragment {
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(getContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show();
-                        Log.d("ProductFormFragment", "Image uploaded successfully");
-                        taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri downloadUri) {
-                                EditText productNameEditText = binding.getRoot().findViewById(R.id.productNameEditText);
-                                EditText productPriceEditText = binding.getRoot().findViewById(R.id.productPriceEditText);
-                                EditText productAuthorEditText = binding.getRoot().findViewById(R.id.authorEditText);
+                        EditText productNameEditText = binding.getRoot().findViewById(R.id.productNameEditText);
+                        EditText productPriceEditText = binding.getRoot().findViewById(R.id.productPriceEditText);
+                        EditText productDescriptionEditText = binding.getRoot().findViewById(R.id.authorEditText);
 
-                                String productName, productPrice, productAuthor;
-                                Validator validator = new Validator();
-                                productName = String.valueOf(productNameEditText.getText());
-                                productPrice = String.valueOf(productPriceEditText.getText());
-                                productAuthor = String.valueOf(productAuthorEditText.getText());
-                                ProductDAO.save(new ProductModel(productAuthor, filename, productName, Integer.parseInt(productPrice), FirebaseAuth.getInstance().getCurrentUser().getEmail()));
-                                Log.d("ProductFormFragment", "Download URL: " + downloadUri.toString());
-                            }
-                        });
+                        String productName, productPrice, productDescription;
+                        productName = String.valueOf(productNameEditText.getText());
+                        productPrice = String.valueOf(productPriceEditText.getText());
+                        productDescription = String.valueOf(productDescriptionEditText.getText());
+                        ProductDAO.save(new ProductModel(productDescription, filename, productName, Integer.parseInt(productPrice), FirebaseAuth.getInstance().getCurrentUser().getEmail()));
+                        Toast.makeText(getContext(), "Product created", Toast.LENGTH_SHORT).show();
                     }
                 });
 

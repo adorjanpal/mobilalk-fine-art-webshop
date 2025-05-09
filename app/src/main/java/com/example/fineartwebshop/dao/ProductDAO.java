@@ -1,28 +1,43 @@
 package com.example.fineartwebshop.dao;
 
+import android.util.Log;
+
+
 import com.example.fineartwebshop.model.ProductModel;
+import com.example.fineartwebshop.type.FirestoreCallback;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.callback.Callback;
+
 public class ProductDAO {
-    public static List<ProductModel> generateDummyProducts() {
-        List<ProductModel> products = new ArrayList<>();
-        products.add(new ProductModel("Author 1", "product_1.jpg", "Product 1", 25, "Seller 1"));
-        products.add(new ProductModel("Author 2", "product_2.jpg", "Product 2", 39, "Seller 2"));
-        products.add(new ProductModel("Author 3", "product_1.jpg", "Product 3", 19, "Seller 3"));
-        products.add(new ProductModel("Author 4", "product_2.jpg", "Product 4", 49, "Seller 4"));
-        products.add(new ProductModel("Author 5", "product_1.jpg", "Product 5", 12, "Seller 5"));
-        products.add(new ProductModel("Author 3", "product_1.jpg", "Product 3", 19, "Seller 3"));
-        products.add(new ProductModel("Author 4", "product_2.jpg", "Product 4", 49, "Seller 4"));
-        products.add(new ProductModel("Author 5", "product_1.jpg", "Product 5", 12, "Seller 5"));
-        return products;
+    private final static String COLLECTION_NAME = "products";
+
+    public static void getAll(FirestoreCallback callback) {
+        CollectionReference productsRef = FirebaseFirestore.getInstance().collection(COLLECTION_NAME);
+
+        productsRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<ProductModel> productList = new ArrayList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    ProductModel product = document.toObject(ProductModel.class);
+                    productList.add(product);
+                }
+                callback.onSuccess(productList);
+            } else {
+                Exception e = task.getException();
+                Log.e("FirestoreError", "Error getting documents: ", e);
+                callback.onFailure(e);
+            }
+        });
     }
 
     public static void save(ProductModel product) {
-        CollectionReference productsRef = FirebaseFirestore.getInstance().collection("products");
+        CollectionReference productsRef = FirebaseFirestore.getInstance().collection(COLLECTION_NAME);
 
         productsRef.add(product);
     }
