@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                 authService.login(username, password, LoginActivity.this);
 
                 loadingProgressBar.setVisibility(View.GONE);
-
             }
         });
 

@@ -22,4 +22,6 @@
     <string name="shop_text">WELCOME TO THE SHOP</string>
     <string name="home_text">HOME PAGE</string>
     <string name="profile_text">PROFILE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
