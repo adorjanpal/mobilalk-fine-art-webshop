@@ -78,24 +78,5 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnRemoveCl
 
     @Override
     public void onRemoveClick(int position) {
-        Log.d("CartFragment", "Remove button clicked for item at position: " + position);
-
-        ProductModel itemToRemove = cartItemAdapter.getItem(position);
-        if (itemToRemove != null) {
-            // TODO: Implement removal from Firestore
-            // Example (conceptual):
-            // UserDAO.removeItemFromCart(FirebaseAuth.getInstance().getCurrentUser().getEmail(), itemToRemove.getId(), task -> {
-            //     if (task.isSuccessful()) {
-            //         // Item removed from Firestore successfully
-            //         // Update the local list and adapter
-            //         cartItems.remove(position);
-            //         cartItemAdapter.notifyItemRemoved(position);
-            //         Toast.makeText(getContext(), "Item removed from cart", Toast.LENGTH_SHORT).show();
-            //     } else {
-            //         Log.e("CartFragment", "Error removing item from Firestore", task.getException());
-            //         Toast.makeText(getContext(), "Error removing item", Toast.LENGTH_SHORT).show();
-            //     }
-            // });
-        }
     }
 }

@@ -1,11 +1,13 @@
 package com.example.fineartwebshop.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,9 +17,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.fineartwebshop.R;
+import com.example.fineartwebshop.dao.UserDAO;
 import com.example.fineartwebshop.databinding.FragmentProfileBinding;
+import com.example.fineartwebshop.model.ProductModel;
+import com.example.fineartwebshop.type.FirestoreCallback;
+import com.example.fineartwebshop.ui.login.LoginActivity;
 import com.example.fineartwebshop.ui.product_form.ProductFormFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.auth.User;
+
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
@@ -49,6 +58,25 @@ public class ProfileFragment extends Fragment {
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
+        });
+
+        binding.deleteProfileButton.setOnClickListener(v -> {
+            UserDAO.deleteByEmail(usernameTextView.getText().toString(), new FirestoreCallback() {
+                @Override
+                public void onSuccess(List<ProductModel> productList) {
+                    Toast.makeText(getContext(), "Profile deleted", Toast.LENGTH_SHORT).show();
+                    FirebaseAuth.getInstance().signOut();
+
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(getContext(), "Failed to delete profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         return root;

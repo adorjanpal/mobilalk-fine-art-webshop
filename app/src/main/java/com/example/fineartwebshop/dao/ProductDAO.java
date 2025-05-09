@@ -12,8 +12,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.callback.Callback;
-
 public class ProductDAO {
     private final static String COLLECTION_NAME = "products";
 

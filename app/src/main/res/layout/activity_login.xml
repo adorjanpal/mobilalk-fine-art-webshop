@@ -9,7 +9,6 @@
     android:padding="24dp"
     tools:context=".ui.login.LoginActivity">
 
-    <!-- App Name -->
     <TextView
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
@@ -23,7 +22,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp" />
 
-    <!-- Username Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_input_layout"
         android:layout_width="0dp"
@@ -44,7 +42,6 @@
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input_layout"
         android:layout_width="0dp"
@@ -65,7 +62,6 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Login Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login"
         android:layout_width="0dp"
@@ -78,7 +74,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Switch to Register -->
     <TextView
         android:id="@+id/switch_to_register"
         android:layout_width="wrap_content"
@@ -92,7 +87,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Loading Indicator -->
     <ProgressBar
         android:id="@+id/loading"
         android:layout_width="wrap_content"

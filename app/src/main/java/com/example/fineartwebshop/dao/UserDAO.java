@@ -3,6 +3,8 @@ package com.example.fineartwebshop.dao;
 import com.example.fineartwebshop.model.ProductModel;
 import com.example.fineartwebshop.model.UserModel;
 import com.example.fineartwebshop.type.FirestoreCallback;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -87,4 +89,33 @@ public class UserDAO {
 
         usersRef.add(new UserModel(email, new ArrayList<>(), new ArrayList<>()));
     }
+
+    public static void deleteByEmail(String email, FirestoreCallback callback) {
+        CollectionReference usersRef = FirebaseFirestore.getInstance().collection(COLLECTION_NAME);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        usersRef.whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                        String userId = document.getId();
+
+                        usersRef.document(userId).delete().
+                                addOnSuccessListener(res -> {
+                                    callback.onSuccess(null);
+                                })
+                                .addOnSuccessListener(aVoid -> {
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    user.delete().addOnFailureListener(callback::onFailure);
+                                })
+                                .addOnFailureListener(callback::onFailure);
+
+                    } else {
+                        callback.onFailure(new Exception("No user found with email: " + email));
+                    }
+                });
+    }
+
+
 }
